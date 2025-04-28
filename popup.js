@@ -5,9 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const API_KEY = "5e422a278a8842ffbe6d60a2e4e14ae3"; // 👈 Your Football-Data API key
+const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"; // 👈 Proxy for CORS
 
 function fetchLiveMatches() {
-  fetch("https://cors-anywhere.herokuapp.com/https://api.football-data.org/v4/teams/64/matches?status=IN_PLAY", {
+  fetch(`${CORS_PROXY}https://api.football-data.org/v4/teams/64/matches?status=IN_PLAY`, {
     headers: { "X-Auth-Token": API_KEY }
   })
     .then(response => response.json())
@@ -36,7 +37,7 @@ function fetchLiveMatches() {
 }
 
 function fetchUpcomingMatches() {
-  fetch("https://api.football-data.org/v4/teams/64/matches?status=SCHEDULED&limit=5", {
+  fetch(`${CORS_PROXY}https://api.football-data.org/v4/teams/64/matches?status=SCHEDULED&limit=5`, {
     headers: { "X-Auth-Token": API_KEY }
   })
     .then(response => response.json())
@@ -57,7 +58,7 @@ function fetchUpcomingMatches() {
 }
 
 function fetchLastMatches() {
-  fetch("https://api.football-data.org/v4/teams/64/matches?status=FINISHED&limit=5", {
+  fetch(`${CORS_PROXY}https://api.football-data.org/v4/teams/64/matches?status=FINISHED&limit=5`, {
     headers: { "X-Auth-Token": API_KEY }
   })
     .then(response => response.json())
@@ -86,9 +87,8 @@ function createMatchElement(match, matchType) {
 
   const homeTeam = match.homeTeam.name;
   const awayTeam = match.awayTeam.name;
-  const isHomeTeam = true
-  const homeTeamBlock = createTeamBlock(homeTeam, isHomeTeam, true);
-  const awayTeamBlock = createTeamBlock(awayTeam, isHomeTeam, false);
+  const homeTeamBlock = createTeamBlock(homeTeam, true);
+  const awayTeamBlock = createTeamBlock(awayTeam, false);
 
   const center = document.createElement("div");
   center.className = "match-center-text";
@@ -121,14 +121,14 @@ function createMatchElement(match, matchType) {
   div.addEventListener("click", () => {
     const searchQuery = `${homeTeam} vs ${awayTeam} news`;
     const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
-    chrome.tabs.create({ url: searchUrl });
+    window.open(searchUrl, '_blank');
   });
 
   return div;
 }
 
 // 🛠️ Helper: Creates left/right team blocks with icon
-function createTeamBlock(teamName, isHomeTeam, isHomeTeam) {
+function createTeamBlock(teamName, isHomeTeam) {
   const container = document.createElement("div");
   container.className = isHomeTeam ? "team-left" : "team-right";
 
