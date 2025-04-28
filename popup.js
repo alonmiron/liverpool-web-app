@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const API_KEY = "5e422a278a8842ffbe6d60a2e4e14ae3"; // 👈 Your Football-Data API key
 
 function fetchLiveMatches() {
-  fetch("https://api.football-data.org/v4/teams/64/matches?status=IN_PLAY", {
+  fetch("https://cors-anywhere.herokuapp.com/https://api.football-data.org/v4/teams/64/matches?status=IN_PLAY", {
     headers: { "X-Auth-Token": API_KEY }
   })
     .then(response => response.json())
