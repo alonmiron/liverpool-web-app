@@ -73,6 +73,12 @@
       </tr>
     </tbody>
   </table>
+  <div class="text-center mt-4">
+    <button id="installButton" class="btn btn-danger" style="display: none;">
+      Install Liverpool FC Fan App
+    </button>
+  </div>
+
 </div>
 
 
@@ -89,6 +95,34 @@
         .then(function() { console.log('Service Worker Registered'); });
     }
   </script>
+  <script>
+    let deferredPrompt;
+    const installButton = document.getElementById('installButton');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent Chrome's default mini-infobar
+      e.preventDefault();
+      // Save the event for later use
+      deferredPrompt = e;
+      // Show the custom install button
+      installButton.style.display = 'inline-block';
+
+      installButton.addEventListener('click', () => {
+        // Show the install prompt
+        deferredPrompt.prompt();
+        // Wait for user response
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+          } else {
+            console.log('User dismissed the install prompt');
+          }
+          deferredPrompt = null;
+        });
+      });
+    });
+  </script>
+
 
 </body>
 </html>
