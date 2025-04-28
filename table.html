@@ -53,31 +53,8 @@
             <th>Points</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <th>1</th>
-            <td>Manchester City</td>
-            <td>34</td>
-            <td>78</td>
-          </tr>
-          <tr>
-            <th>2</th>
-            <td>Arsenal</td>
-            <td>34</td>
-            <td>76</td>
-          </tr>
-          <tr>
-            <th>3</th>
-            <td><strong>Liverpool</strong></td>
-            <td>34</td>
-            <td>75</td>
-          </tr>
-          <tr>
-            <th>4</th>
-            <td>Aston Villa</td>
-            <td>34</td>
-            <td>68</td>
-          </tr>
+        <tbody id="standingsTableBody">
+          <tr><td colspan="4">Loading...</td></tr>
         </tbody>
       </table>
     </div>
@@ -91,6 +68,52 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
         .then(function() { console.log('Service Worker Registered on Table Page'); });
+    }
+  </script>
+
+  <!-- Fetch Standings and Highlight Liverpool -->
+  <script>
+    const API_KEY = "5e422a278a8842ffbe6d60a2e4e14ae3";
+    const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      fetchStandings();
+    });
+
+    function fetchStandings() {
+      fetch(`${CORS_PROXY}https://api.football-data.org/v4/competitions/PL/standings`, {
+        headers: { "X-Auth-Token": API_KEY }
+      })
+        .then(response => response.json())
+        .then(data => {
+          const standings = data.standings[0].table;
+          const tableBody = document.getElementById("standingsTableBody");
+
+          tableBody.innerHTML = "";
+
+          standings.forEach(team => {
+            const tr = document.createElement("tr");
+
+            tr.innerHTML = `
+              <th>${team.position}</th>
+              <td><img src="${team.team.crest}" alt="${team.team.name}" style="width: 20px; height: 20px; margin-right: 5px;"> ${team.team.name}</td>
+              <td>${team.playedGames}</td>
+              <td>${team.points}</td>
+            `;
+
+            // Highlight Liverpool Row
+            if (team.team.name.toLowerCase().includes("liverpool")) {
+              tr.classList.add("table-danger");
+            }
+
+            tableBody.appendChild(tr);
+          });
+        })
+        .catch(err => {
+          console.error("Error fetching standings:", err);
+          const tableBody = document.getElementById("standingsTableBody");
+          tableBody.innerHTML = "<tr><td colspan='4' class='text-warning'>Error loading standings. Please try again later.</td></tr>";
+        });
     }
   </script>
 
