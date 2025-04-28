@@ -1,143 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Liverpool FC Fan App</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Your custom styles -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Manifest for PWA -->
   <link rel="manifest" href="manifest.json">
-
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
-    .header {
-      margin-top: 30px;
-      text-align: center;
-    }
-  </style>
 </head>
-<body>
 
+<body>
+  <!-- Navigation Bar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Liverpool FC</a>
+      <a class="navbar-brand" href="index.html">Liverpool FC App</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="table.html">Standings</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 
-  <div class="container">
-    <div class="header">
+  <!-- Main Content -->
+  <div class="container text-white">
+    <div class="header text-center my-4">
       <h1>Welcome to the Liverpool FC Fan App!</h1>
       <p class="lead">Latest news, player stats, and standings.</p>
     </div>
-    <div id="overlay" class="text-center my-4">
-  <img src="icon.png" alt="Liverpool Icon" class="top-icon mb-3" />
-  <h1 class="h1">Liverpool Live</h1>
-
-  <section id="liveSection" class="my-4">
-    <h2 class="h4">🔥 Live Match</h2>
-    <div id="liveMatchesList"></div>
-  </section>
-
-  <section id="lastMatchesSection" class="my-4">
-    <h2 class="h4">Last Matches</h2>
-    <div id="lastMatchesList">Loading…</div>
-  </section>
-
-  <section id="matchesSection" class="my-4">
-    <h2 class="h4">Upcoming Matches</h2>
-    <div id="matchesList">Loading…</div>
-  </section>
-
-  <section id="support" class="my-4">
-    <h2 class="h4">Support the Project</h2>
-    <a href="https://www.buymeacoffee.com/YOURNAME" target="_blank" class="btn btn-warning my-2">☕ Buy Me a Coffee</a><br />
-    <a href="https://fanatics.com/liverpool-shirt?ref=yourAffiliateID" target="_blank" class="btn btn-success my-2">🛒 Liverpool Merch</a>
-  </section>
-</div>
-
 
     <hr>
-    <div class="table-responsive mt-4">
-  <h2 class="text-center mb-4">Premier League Standings</h2>
-  <table class="table table-striped table-hover table-bordered">
-    <thead class="table-danger">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Team</th>
-        <th scope="col">Played</th>
-        <th scope="col">Points</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Manchester City</td>
-        <td>34</td>
-        <td>78</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Arsenal</td>
-        <td>34</td>
-        <td>76</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td><strong>Liverpool</strong></td>
-        <td>34</td>
-        <td>75</td>
-      </tr>
-      <tr>
-        <th scope="row">4</th>
-        <td>Aston Villa</td>
-        <td>34</td>
-        <td>68</td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="text-center mt-4">
-    <button id="installButton" class="btn btn-danger" style="display: none;">
-      Install Liverpool FC Fan App
-    </button>
-  </div>
 
-</div>
+    <section id="liveSection" class="my-4">
+      <h2 class="text-center mb-4">🔥 Live Matches</h2>
+      <div id="liveMatchesList">Loading live matches...</div>
+    </section>
 
+    <section id="lastMatchesSection" class="my-4">
+      <h2 class="text-center mb-4">Last Matches</h2>
+      <div id="lastMatchesList">Loading last matches...</div>
+    </section>
 
-    <div class="text-center">
-      <p>Stay tuned for updates!</p>
+    <section id="matchesSection" class="my-4">
+      <h2 class="text-center mb-4">Upcoming Matches</h2>
+      <div id="matchesList">Loading upcoming matches...</div>
+    </section>
+
+    <section id="support" class="my-5 text-center">
+      <h2 class="h4">Support the Project</h2>
+      <a href="https://www.buymeacoffee.com/YOURNAME" target="_blank" class="btn btn-warning my-2">☕ Buy Me a Coffee</a><br />
+      <a href="https://fanatics.com/liverpool-shirt?ref=yourAffiliateID" target="_blank" class="btn btn-success my-2">🛒 Liverpool Merch</a>
+    </section>
+
+    <div class="text-center mt-4">
+      <button id="installButton" class="btn btn-danger" style="display: none;">
+        Install Liverpool FC Fan App
+      </button>
     </div>
+
   </div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Optional: Register Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
-        .then(function() { console.log('Service Worker Registered'); });
+        .then(function() { console.log('Service Worker Registered on Home Page'); });
     }
   </script>
+
+  <!-- Your custom popup.js for matches -->
+  <script src="popup.js"></script>
+
+  <!-- Install Button Logic -->
   <script>
     let deferredPrompt;
     const installButton = document.getElementById('installButton');
 
     window.addEventListener('beforeinstallprompt', (e) => {
-      // Prevent Chrome's default mini-infobar
       e.preventDefault();
-      // Save the event for later use
       deferredPrompt = e;
-      // Show the custom install button
       installButton.style.display = 'inline-block';
 
       installButton.addEventListener('click', () => {
-        // Show the install prompt
         deferredPrompt.prompt();
-        // Wait for user response
         deferredPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
             console.log('User accepted the install prompt');
@@ -149,9 +111,6 @@
       });
     });
   </script>
-<script src="popup.js"></script>
-
-
 
 </body>
 </html>
