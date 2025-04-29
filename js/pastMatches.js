@@ -58,7 +58,7 @@ function createMobilePastMatchCard(match) {
       <!-- Divider + Date/Time vertically -->
 <!-- Divider + Date/Time vertically -->
       <div class="col-4 d-flex align-items-center">
-        <div class="divider me-3" style="height: 80%;"></div> <!-- adjust height manually here too -->
+        <div class="divider me-3" style="height: 20px;"></div> <!-- adjust height manually here too -->
         <div class="d-flex flex-column justify-content-center align-items-center">
           <span class="match-date">${date}</span>
           <span class="match-time">${time}</span>
