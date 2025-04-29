@@ -21,7 +21,7 @@ function fetchPastMatches() {
     }
 
 matches.forEach(match => {
-  const matchCard = createPastMatchCard(match);
+  const matchCard = createMobilePastMatchCard(match);
   container.appendChild(matchCard);
 });
   })
@@ -31,39 +31,35 @@ matches.forEach(match => {
 }
 
 
-function createPastMatchCard(match) {
-  const div = document.createElement("div");
-  div.className = "card bg-dark text-white mb-4 shadow-sm";
-  div.style.borderRadius = "15px";
+function createMobilePastMatchCard(match) {
+  const card = document.createElement("div");
+  card.className = "card bg-dark text-white mb-4 shadow-sm";
+  card.style.borderRadius = "15px";
 
   const matchDate = new Date(match.utcDate);
   const formattedDate = matchDate.toLocaleDateString();
 
-  div.innerHTML = `
+  card.innerHTML = `
     <div class="card-body">
-      <h5 class="card-title text-center text-uppercase mb-3 fs-4">
-        ${match.homeTeam.name} vs ${match.awayTeam.name}
-      </h5>
+      <div class="row align-items-center">
+        <!-- Left side: team names -->
+        <div class="col-8">
+          <div class="fw-semibold fs-5">${match.homeTeam.name}</div>
+          <div class="fw-semibold fs-5">${match.awayTeam.name}</div>
+        </div>
 
-      <div class="row text-center align-items-center mb-3">
-        <div class="col-5">
-          <span class="fw-semibold fs-5">${match.homeTeam.name}</span>
-        </div>
-        <div class="col-2 d-flex justify-content-center align-items-center">
-          <span class="fs-4 fw-bold">${match.score.fullTime.home ?? "-"}</span>
-          <span class="fs-4 mx-2">:</span>
-          <span class="fs-4 fw-bold">${match.score.fullTime.away ?? "-"}</span>
-        </div>
-        <div class="col-5">
-          <span class="fw-semibold fs-5">${match.awayTeam.name}</span>
+        <!-- Right side: vertical score -->
+        <div class="col-4 text-end fs-4 fw-bold d-flex flex-column justify-content-center align-items-end">
+          <div>${match.score.fullTime.home ?? "-"}</div>
+          <div>${match.score.fullTime.away ?? "-"}</div>
         </div>
       </div>
 
-      <p class="card-text text-center small text-secondary">
+      <p class="card-text text-center text-secondary small mt-3 mb-0">
         Played on: ${formattedDate}
       </p>
     </div>
   `;
 
-  return div;
+  return card;
 }

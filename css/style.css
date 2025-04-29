@@ -221,3 +221,22 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.card {
+  padding: 1rem;
+  border-radius: 15px;
+}
+
+.card .fs-5 {
+  font-size: 1.15rem;
+}
+
+@media (max-width: 576px) {
+  .card .fs-5 {
+    font-size: 1.1rem;
+  }
+  .card .fs-4 {
+    font-size: 1.3rem;
+  }
+}
+
