@@ -42,28 +42,29 @@ function createMobilePastMatchCard(match) {
 
   card.innerHTML = `
     <div class="row align-items-center">
-      <!-- Left: Teams + Score -->
-      <div class="col-7 d-flex flex-column justify-content-center">
-        <div class="d-flex justify-content-between align-items-center mb-2">
-          <span class="team-name">${match.homeTeam.name}</span>
-          <span class="team-score">${match.score.fullTime.home ?? "-"}</span>
-        </div>
-        <div class="d-flex justify-content-between align-items-center">
-          <span class="team-name">${match.awayTeam.name}</span>
-          <span class="team-score">${match.score.fullTime.away ?? "-"}</span>
+      
+      <!-- Left: Teams -->
+      <div class="col-5 d-flex flex-column justify-content-center">
+        <span class="team-name">${match.homeTeam.name}</span>
+        <span class="team-name">${match.awayTeam.name}</span>
+      </div>
+
+      <!-- Middle: Scores -->
+      <div class="col-3 d-flex flex-column align-items-center justify-content-center">
+        <span class="team-score">${match.score.fullTime.home ?? "-"}</span>
+        <span class="score-separator">:</span>
+        <span class="team-score">${match.score.fullTime.away ?? "-"}</span>
+      </div>
+
+      <!-- Divider + Date/Time vertically -->
+      <div class="col-4 d-flex">
+        <div class="divider me-3"></div>
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <span class="match-date">${date}</span>
+          <span class="match-time">${time}</span>
         </div>
       </div>
 
-      <!-- Divider -->
-      <div class="col-1 d-flex justify-content-center">
-        <div class="divider"></div>
-      </div>
-
-      <!-- Right: Date + Time -->
-      <div class="col-4 text-end d-flex flex-column justify-content-center">
-        <span class="match-date">${date}</span>
-        <span class="match-time">${time}</span>
-      </div>
     </div>
   `;
 
