@@ -31,31 +31,31 @@ matches.forEach(match => {
 }
 
 
-function createPastMatchCard(match) {
+ffunction createPastMatchCard(match) {
   const div = document.createElement("div");
   div.className = "card bg-dark text-white mb-3 shadow-sm";
-  div.style.borderRadius = "15px"; // smooth rounded corners
+  div.style.borderRadius = "15px";
 
   const matchDate = new Date(match.utcDate);
   const formattedDate = matchDate.toLocaleDateString();
 
   div.innerHTML = `
     <div class="card-body">
-      <h5 class="card-title text-center mb-3">
+      <h6 class="card-title text-center text-uppercase mb-3">
         ${match.homeTeam.name} vs ${match.awayTeam.name}
-      </h5>
+      </h6>
 
-      <div class="row text-center mb-3">
-        <div class="col">
-          <h6 class="fw-bold">${match.homeTeam.name}</h6>
+      <div class="row text-center align-items-center mb-3">
+        <div class="col-5 col-md-5">
+          <span class="fw-semibold">${match.homeTeam.name}</span>
         </div>
-        <div class="col-auto d-flex align-items-center">
-          <span class="fs-3 fw-bold">${match.score.fullTime.home ?? "-"}</span>
-          <span class="fs-5 mx-2">:</span>
-          <span class="fs-3 fw-bold">${match.score.fullTime.away ?? "-"}</span>
+        <div class="col-2 col-md-2">
+          <span class="fs-5 fw-bold">${match.score.fullTime.home ?? "-"}</span><br>
+          <span class="text-light">:</span><br>
+          <span class="fs-5 fw-bold">${match.score.fullTime.away ?? "-"}</span>
         </div>
-        <div class="col">
-          <h6 class="fw-bold">${match.awayTeam.name}</h6>
+        <div class="col-5 col-md-5">
+          <span class="fw-semibold">${match.awayTeam.name}</span>
         </div>
       </div>
 
@@ -67,4 +67,3 @@ function createPastMatchCard(match) {
 
   return div;
 }
-
