@@ -31,7 +31,7 @@ matches.forEach(match => {
 }
 
 
-ffunction createPastMatchCard(match) {
+function createPastMatchCard(match) {
   const div = document.createElement("div");
   div.className = "card bg-dark text-white mb-3 shadow-sm";
   div.style.borderRadius = "15px";
