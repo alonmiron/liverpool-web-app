@@ -33,31 +33,37 @@ matches.forEach(match => {
 
 function createMobilePastMatchCard(match) {
   const card = document.createElement("div");
-  card.className = "card bg-dark text-white mb-4 shadow-sm";
+  card.className = "card bg-dark text-white mb-4 shadow-sm p-3";
   card.style.borderRadius = "15px";
 
   const matchDate = new Date(match.utcDate);
-  const formattedDate = matchDate.toLocaleDateString();
+  const date = matchDate.toLocaleDateString();
+  const time = matchDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   card.innerHTML = `
-    <div class="card-body">
-      <div class="row align-items-center">
-        <!-- Left side: team names -->
-        <div class="col-8">
-          <div class="fw-semibold fs-5">${match.homeTeam.name}</div>
-          <div class="fw-semibold fs-5">${match.awayTeam.name}</div>
+    <div class="row align-items-center">
+      <!-- Left: Teams + Score -->
+      <div class="col-7 d-flex flex-column justify-content-center">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <span class="team-name">${match.homeTeam.name}</span>
+          <span class="team-score">${match.score.fullTime.home ?? "-"}</span>
         </div>
-
-        <!-- Right side: vertical score -->
-        <div class="col-4 text-end fs-4 fw-bold d-flex flex-column justify-content-center align-items-end">
-          <div>${match.score.fullTime.home ?? "-"}</div>
-          <div>${match.score.fullTime.away ?? "-"}</div>
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="team-name">${match.awayTeam.name}</span>
+          <span class="team-score">${match.score.fullTime.away ?? "-"}</span>
         </div>
       </div>
 
-      <p class="card-text text-center text-secondary small mt-3 mb-0">
-        Played on: ${formattedDate}
-      </p>
+      <!-- Divider -->
+      <div class="col-1 d-flex justify-content-center">
+        <div class="divider"></div>
+      </div>
+
+      <!-- Right: Date + Time -->
+      <div class="col-4 text-end d-flex flex-column justify-content-center">
+        <span class="match-date">${date}</span>
+        <span class="match-time">${time}</span>
+      </div>
     </div>
   `;
 

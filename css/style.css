@@ -14,7 +14,7 @@ html, body {
 }
 
 body {
-  background: url('background.png') no-repeat center center fixed;
+  background: url('resorces/background.png') no-repeat center center fixed;
   background-size: cover; /* ✅ Make it fit nicely */
   background-color: black; /* fallback */
   display: flex;
@@ -212,31 +212,43 @@ section {
    ✅ Links
 ------------------------------ */
 
-a {
-  color: #ffc107;
-  text-decoration: none;
-  font-weight: bold;
+.team-name {
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
-a:hover {
-  text-decoration: underline;
+.team-score {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin-left: 0.5rem;
 }
 
-.card {
-  padding: 1rem;
-  border-radius: 15px;
+.match-date,
+.match-time {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #ccc;
 }
 
-.card .fs-5 {
-  font-size: 1.15rem;
+.divider {
+  width: 1px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 @media (max-width: 576px) {
-  .card .fs-5 {
-    font-size: 1.1rem;
-  }
-  .card .fs-4 {
+  .team-name {
     font-size: 1.3rem;
   }
-}
 
+  .team-score {
+    font-size: 1.5rem;
+  }
+
+  .match-date,
+  .match-time {
+    font-size: 1.1rem;
+  }
+}
