@@ -52,7 +52,6 @@ function createMobilePastMatchCard(match) {
       <!-- Middle: Scores -->
       <div class="col-3 d-flex flex-column align-items-center justify-content-center">
         <span class="team-score">${match.score.fullTime.home ?? "-"}</span>
-        <span class="score-separator">:</span>
         <span class="team-score">${match.score.fullTime.away ?? "-"}</span>
       </div>
 
